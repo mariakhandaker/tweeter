@@ -1,0 +1,15 @@
+.new-tweet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  min-width: 100%;
+}
+
+.new-tweet textarea {
+  border-bottom: 3px black solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: #f4f1ec;
+}
