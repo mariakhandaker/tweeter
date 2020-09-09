@@ -1,4 +1,6 @@
 nav {
+  position: fixed;
+  top: 0;
   font-family: 'Bungee', sans-serif;
   height: 120px;
   width: 100%;
