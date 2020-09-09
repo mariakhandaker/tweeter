@@ -27,8 +27,17 @@ body {
 */
 main {
   display: flex;
+  flex-direction: column;
   width: 90%;
-  align-items: center;
-  justify-items: center;
   margin: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  background-color: #ffffff;
+  justify-items: left;
+  width: 750px;
+  padding: 2em;
 }
