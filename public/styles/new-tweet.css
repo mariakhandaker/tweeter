@@ -1,8 +1,10 @@
-.new-tweet {
+.new-tweet .tweet {
   display: flex;
   flex-direction: column;
   justify-items: center;
-  
+  width: 100%;
+  height: 50px;
+  padding: 0.5em; 
 }
 
 .new-tweet textarea {
@@ -17,9 +19,10 @@
   font-family: 'Bungee', sans-serif;
   background-color: #4056a1;
   color: white;
+  float: left;
 }
 
-.new-tweet output {
+#formulating-thought {
   font-family: 'Bungee', sans-serif;
   float: right;
 }
