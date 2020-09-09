@@ -1,12 +1,12 @@
-$(document).ready(function() {
-  
-  $('formulating-thought').keyup(function() {
-    const maximumCharacters = 140;
-    let remainingCharacters = maximumCharacters - $(this).val().length;
-    if (remainingCharacters >= 0) {
-      $(".new-tweet .counter").css('color', 'black');
+$(document).ready(function() { 
+   $('#formulating-thought').keyup(function() {
+    let remainingCharacters = 140 - $(this).val().length;
+    console.log(remainingCharacters);
+    $('.counter').val(remainingCharacters);
+    if (remainingCharacters < 0) {
+      $('.counter').css('color', 'red');
     } else {
-      $(".new-tweet .counter").css('color', 'red');
+      $('.counter').css('color', 'black');
     }
   })
 });
