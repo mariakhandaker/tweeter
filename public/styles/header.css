@@ -8,5 +8,6 @@ header {
   flex-direction: column;
   background-color: #A7D2DD;
   background-image: url("https://www.transparenttextures.com/patterns/arches.png");
-  color: #ffffff; 
+  color: #ffffff;
+  margin-top: 120px; 
 }
