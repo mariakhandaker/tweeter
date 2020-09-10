@@ -43,7 +43,10 @@ return $tweet;
 };
 
 const renderTweets = function(tweets) {
-  for (let tweet of tweets.reverse()) {
+  tweets = tweets.sort(function(a, b) {
+    return a.created_at - b.created_at;
+  });
+  for (let tweet of tweets) {
     $('.tweets').prepend(createTweetElement(tweet));
   }
 };
