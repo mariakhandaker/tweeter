@@ -44,22 +44,20 @@ const createTweetElement = (tweet) => {
 };
 
 const renderTweets = function(tweets) {
+  $('.posted-tweets').empty();
   tweets = tweets.sort(function(a, b) {
     return a.created_at - b.created_at;
   });
   for (let tweet of tweets) {
-    $('.tweets').prepend(createTweetElement(tweet));
+    $('.posted-tweets').prepend(createTweetElement(tweet));
   }
 };
 
 const loadTweets = () => {
-  const $form = $('form');
-  $('tweet-holder').empty();
       $.ajax({
       url: "/tweets",
       method: "GET"
     }).then((response) => {
-    //  $('tweet-holder').empty();
      renderTweets(response);
     })
 };
@@ -73,7 +71,7 @@ $(document).ready(() => {
       $('#error').text('Cannot post an empty tweet.');
       $('#error').slideDown(300);
     } else if ($('#formulating-thought').val().length > 140) {
-      $('#error').text('Your tweet has exceeded character limit.');
+      $('#error').text('You have exceeded the character limit.');
       $('#error').slideDown(300);
     } else {
       $.ajax({
@@ -81,10 +79,10 @@ $(document).ready(() => {
         method: "POST",
         data: serialized
       }).then((response) => {
+        loadTweets();
         $('#error').css('display', 'none');
         $('#formulating-thought').val('');
         $('.counter').val('140');
-        loadTweets();
       })
     }}
   )

@@ -35,17 +35,23 @@
     <nav>
       <span>tweeter</span>
     </nav>
-    <header class="main-header">
-      <div>
+    
+    <div class="flexinabox">
+    
+      <header class="main-header">
+        <div>
           <img src="/images/profile-hex.png"> 
-      </div>
-      <br>
-      <div>
-          <h2>Maria Khandaker</h2>
-      </div>
-  </header>
-    <!-- Page-specific (main) content here -->
-    <main class="container">
+        </div>
+        <br>
+        <div>
+          <h2><span>Maria</span> Khandaker</h2>
+        </div>
+      </header>
+      
+<!-- Page-specific (main) content here -->
+      <main class="container">
+      <h4 id="error"></h4>
+      
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form action="/tweets" method="POST">
@@ -56,28 +62,13 @@
           </div>
         </form>
       </section>
-      <div class="tweets">
-      <article class="tweet-holder">
-        <header>
-          <div class="tweet-top">
-            <img src="/images/profile-hex.png">
-            <p id="tweeter-username">Maria Khandaker</p>
-          </div>
-          <p id="tweeter-handle">@p0lyhymni4</p>
-        </header>
-        <div class="tweet-content">
-          <p>tweedle-dee</p>
-        </div>
-      <span class="tweet-foot">
-         <p>3 min ago</p>
-        <div class="icons">
-          <i class="fa fa-heart"></i>
-          <i class="fa fa-flag"></i>
-          <i class="fa fa-retweet"></i>
-        </div>
-      </span>
-      </article> 
-      </div> 
-    </main>
+      
+     <div class="posted-tweets">
+     
+    </div> 
+      
+      </main>
+      
+    </div>
   </body>
 </html>
