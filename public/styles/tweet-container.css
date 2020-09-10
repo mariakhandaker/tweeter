@@ -57,7 +57,7 @@
   align-content: space-between;
 }
 
-.icons {
+#icons {
   align-self: flex-end;
   color: #D64045;
 }
