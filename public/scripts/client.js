@@ -16,13 +16,14 @@ const escape = (str) => {
 const createTweetElement = (tweet) => {
   let createdDate = new Date(tweet.created_at);
   let today = Date.now();
-  let difference = Math.round((today - createdDate) / 1000 / 60 / 60 / 24);
+  let minutes = Math.round((today - createdDate) / 1000 / 60)
+  let days = Math.round((today - createdDate) / 1000 / 60 / 60 / 24);
   const $tweet = `
   <article class="tweet-holder">
     <header>
       <div class="tweet-top">
         <img src= ${escape(tweet.user.avatars)}">
-         <p class="tweeter-username">${escape(tweet.user.name)}</p>
+         <p class="tweeter-username">${tweet.user.name}</p>
       </div> 
         <p class="tweeter-handle">${escape(tweet.user.handle)}</p>
      </header>
@@ -30,16 +31,16 @@ const createTweetElement = (tweet) => {
         <p>${escape(tweet.content.text)}</p>
         </div>
       <footer class="tweet-foot">
-        <div class="timeAgo">${difference} days ago</div>
+        <p class="timeAgo">${ days < 1 ? (minutes + ' minutes') : (days + ' days')} ago</p>
         <div id="icons">
           <i class="fa fa-heart"></i>
           <i class="fa fa-flag"></i>
           <i class="fa fa-retweet"></i>
         </div>
       </footer>
-  </article>
-`
-return $tweet;
+    </article>
+  `
+  return $tweet;
 };
 
 const renderTweets = function(tweets) {
