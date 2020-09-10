@@ -8,7 +8,7 @@ const renderTweets = function(tweets) {
   const orderedTweets = tweets.sort((a, b) => { a.created_at - b.created_at });
   for (let tweet of orderedTweets) {
     const newTweet = createTweetElement(tweet);
-    $('#tweet-holder').append(newTweet);
+    $('#tweet-holder').prepend(newTweet);
   }
 }
 
