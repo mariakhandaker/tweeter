@@ -69,15 +69,23 @@ $(document).ready(() => {
   $('form').submit((event) => {
     event.preventDefault();
     const serialized = $(event.target).serialize();
-    $.ajax({
-      url: "/tweets",
-      method: "POST",
-      data: serialized
-    }).then((response) => {
-      $('#error').css('display', 'none');
-      $('.tweets').empty();
-      $('#formulating-thought').val('');
-      loadTweets();
-    })
-  })
+    if ($('#formulating-thought').val() === "" || $('#formulating-thought').val() === null) {
+      $('#error').text('Cannot post an empty tweet.');
+      $('#error').slideDown(300);
+    } else if ($('#formulating-thought').val().length > 140) {
+      $('#error').text('Your tweet has exceeded character limit.');
+      $('#error').slideDown(300);
+    } else {
+      $.ajax({
+        url: "/tweets",
+        method: "POST",
+        data: serialized
+      }).then((response) => {
+        $('#error').css('display', 'none');
+        $('#formulating-thought').val('');
+        $('.counter').val('140');
+        loadTweets();
+      })
+    }}
+  )
 })
