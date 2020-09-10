@@ -3,30 +3,6 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-].
 
 const renderTweets = function(tweets) {
   const orderedTweets = tweets.sort((a, b) => { a.created_at - b.created_at });
@@ -37,13 +13,13 @@ const renderTweets = function(tweets) {
 }
 
 const timeAgo = function(tweet) {
-  const time_ago = tweet.created_at/1000;
-  const currentTime = new Date;
-  let seconds = currentTime - time_ago;
+  const createdAt = new Date(tweet.created_at);
+  const currentTime = Date.now();
+  let seconds = Math.round(currentTime - createdAt);
   if (seconds <= 60) {
     return "just now";
   } else {
-    let minutes = Math.round(seconds / 60);
+    let minutes = seconds / 60;
     if (minutes <= 60) {
       if (minutes == 1) {
         return "one minute ago";
@@ -51,7 +27,7 @@ const timeAgo = function(tweet) {
         return minutes + " minutes ago";
       }
     } else {
-      let hours = Math.round(seconds / 3600);
+      let hours = minutes / 60;
       if (hours <= 24) {
         if (hours == 1) {
           return "an hour ago";
@@ -59,7 +35,7 @@ const timeAgo = function(tweet) {
           return hours + " hrs ago";
         }
       } else {
-        let days = Math.round(seconds / 86400);
+        let days = hours / 24;
         if (days <= 7) {
           if (days == 1) {
             return "yesterday";
@@ -67,7 +43,7 @@ const timeAgo = function(tweet) {
             return days + " days ago";
           }
         } else {
-          let weeks = Math.round(seconds / 604800);
+          let weeks = days / 7;
           if (weeks <= 4.3) {
             if (weeks == 1) {
               return "a week ago";
@@ -75,7 +51,7 @@ const timeAgo = function(tweet) {
               return weeks + " weeks ago";
             }
           } else {
-            let months = Math.round(seconds / 2600640);
+            let months = weeks / 4;
             if (months <= 12) {
               if (months == 1) {
                   return "a month ago";
@@ -83,10 +59,10 @@ const timeAgo = function(tweet) {
                   return months + " months ago";
               }
             } else {
-              let years = Math.round(seconds / 31207680);
+              let years = months / 12;
               if (years == 1) {
                 return "one year ago";
-               } else {
+              } else {
                 return years + " years ago";
               }
             }
@@ -96,32 +72,64 @@ const timeAgo = function(tweet) {
     }
   }
 } 
-   
 
-const createTweetElement = function(tweet) {
-  
-  
+const escape = (str) => {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+const createTweetElement = (tweet) => { 
  let $tweet =
   <article class="tweet-holder">
     <header>
-          <div class="tweet-top">
-            <img src="${tweet.user.avatars}">
-            <p id="tweeter-username">${tweet.user.name}</p>
-          </div>
-          <p id="tweeter-handle">${tweet.user.handle}</p>
-        </header>
+      <div class="tweet-header">
+        <img src= ${escape(tweet.user.avatars)}">
+         <p class="tweeter-username">${escape(tweet.user.name)}</p>
+      </div> 
+        <p class="tweeter-handle">${escape(tweet.user.handle)}</p>
+     </header>
         <div class="tweet-content">
-          <p>${tweet.content.text}</p>
+        <p>${escape(tweet.content.text)}</p>
         </div>
-      <span class="tweet-foot">
-         <p>3 min ago</p>
-        <div class="icons">
+      <footer class="tweet-foot">
+        <div class="timeAgo">${timeAgo(tweet)}</div>
+        <div id="icons">
           <i class="fa fa-heart"></i>
           <i class="fa fa-flag"></i>
           <i class="fa fa-retweet"></i>
         </div>
-        </span>
-return $tweet;
+      </footer>
+  </article>
+  return $tweet;
 };
 
-renderTweets(data);
+$(document).ready(() => {
+  const loadTweets = function() {
+    $.ajax({
+      url: "/tweets",
+      method: "GET"
+    }).then((response) => {
+     $('tweet-holder').empty();
+     renderTweets(response);
+    })
+  }
+  
+  loadTweets();
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const serialized = $(this).serialize();
+  })
+  
+  $.ajax({
+    url: "/tweets",
+    method: "POST",
+    data: serialized
+  }).then((response) => {
+    console.log("Success!")
+    loadTweets();
+    $('#error').css('display', 'none');
+    $('tweet-holder').val('');
+    $('.counter').val('140');
+  });
+});
