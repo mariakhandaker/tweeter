@@ -1,6 +1,10 @@
-.tweet-holder {
+.posted-tweets {
   display: flex;
   flex-direction: column;
+  padding-left: 100px; 
+}
+
+.tweet-holder {
   border: 4px black solid;
   margin-top: 20px;
   padding: 20px;
@@ -11,6 +15,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 30px;
+  width: 100%;
   
 }
 
@@ -54,10 +59,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-content: space-between;
+  width: 100%
 }
 
 #icons {
   align-self: flex-end;
-  color: #D64045;
+  color: #EA9A9D;
+}
+
+@media only screen and (min-width: 1024px) {
+  .tweet-holder {
+    width: 90%;
+    float: right;
+  }
 }

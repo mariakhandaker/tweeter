@@ -8,6 +8,7 @@
   border-bottom: 4px black solid;
   background-color: #f4f1ec;
   width: 100%;
+  padding: 10px;
 }
 
 .new-tweet button {
@@ -20,4 +21,12 @@
 .new-tweet .counter {
   font-family: 'Bungee', sans-serif;
   float: right;
+}
+
+@media only screen and (min-width: 1024px) {
+  .new-tweet {
+    margin: 2em auto;
+    margin-left: 3.5em;
+    width: 90%;
+  }
 }

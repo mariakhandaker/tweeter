@@ -2,10 +2,22 @@ nav {
   display: flex;
   position: fixed;
   top: 0;
+  background-color: #9ED8DB;
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png");
   font-family: 'Bungee', sans-serif;
   height: 120px;
   width: 100%;
-  background-color: #4056A1;
   color: #FFFFFF;
   padding: 1.5em;
+}
+
+nav span {
+  text-align: center;
+  font-family: 'Bungee', sans-serif;
+}
+
+@media only screen and (min-width: 1024px) {
+  nav {
+    position: static;
+  }
 }
