@@ -15,8 +15,8 @@ html {
  */
 
 body {
-  color: #545149;
-  background-color: #f4f1ec;
+  color: #101C2E;
+  background-color: #F0F9F9;
   font-size: 24px;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -45,7 +45,7 @@ body {
   flex-direction: column;
   margin: auto;
   padding-top: 50px;
-  background-color: #f4f1ec;
+  background-color: #F0F9F9;
   width: 90%;
 }
 
